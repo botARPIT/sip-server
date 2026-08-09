@@ -10,12 +10,13 @@ class SIPMessage:
 def parse_raw_sip_message(message: str) -> SIPMessage:
     message = message.splitlines()
     start_line = message[0]
-    headers = []
+    headers = {}
     for lines in message[1:]:
         if "\n\n" in lines:
             break
         else:
-            headers.append(lines)
+            value = lines.split(":", 1)
+            headers[value[0]] = value[1]
     body = []
     print(start_line)
     print(headers)

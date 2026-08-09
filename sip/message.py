@@ -12,7 +12,9 @@ def parse_raw_sip_message(message: str) -> SIPMessage:
     start_line = message[0]
     headers = []
     for lines in message[1:]:
-        if ":" in lines:
+        if "\n\n" in lines:
+            break
+        else:
             headers.append(lines)
     body = []
     print(start_line)
